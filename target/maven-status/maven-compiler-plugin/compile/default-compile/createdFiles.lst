@@ -1,0 +1,4 @@
+study\fw\core\exception\StudyBizException.class
+study\fw\online\aspect\StudyControllerClassNameAdvice.class
+study\fw\online\aspect\StudyControllerExceptionAdvice.class
+study\fw\core\spring\bean\FullyQualifiedBeanNameGenerator.class
