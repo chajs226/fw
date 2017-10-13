@@ -13,6 +13,7 @@ spring framework를 공부하며 예외, 전문 처리 등 기본 기능 구현�
 ```java
 @ControllerAdvice
 public class StudyControllerExceptionAdvice {
+     /*
      * 업무 프로그램에서 StudyBizException 예외를 던지면  StudyBizException 예외의 ExcetpionHandler로 선언된 
      * handleStudyBizException 함수가 잡아서 처리하게 된다.
      */
