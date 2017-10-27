@@ -19,6 +19,10 @@ public class Header implements Cloneable {
      */
     private String ip;
     /**
+     * 결과 메시지 ID
+     */
+    private String messageId;
+    /**
      * 결과 메시지
      */
     private String message;
@@ -159,5 +163,11 @@ public class Header implements Cloneable {
 		return "Header [systemid=" + systemid + ", user=" + user + ", ip=" + ip + ", message=" + message
 				+ ", resultCode=" + resultCode + ", guid=" + guid + ", reqdt=" + reqdt + ", resdt=" + resdt
 				+ ", service=" + service + ", server=" + server + "]";
+	}
+	public String getMessageId() {
+		return messageId;
+	}
+	public void setMessageId(String messageId) {
+		this.messageId = messageId;
 	}
 }
