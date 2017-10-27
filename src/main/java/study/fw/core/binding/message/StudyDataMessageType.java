@@ -1,6 +1,7 @@
 package study.fw.core.binding.message;
 
 public enum StudyDataMessageType {
+
 	/**
 	 * 요청 전문 메시지 타입
 	 */

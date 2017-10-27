@@ -2,23 +2,33 @@ package study.fw.core.binding;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.Locale;
 import java.util.UUID;
 
 import org.apache.commons.compress.utils.IOUtils;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpInputMessage;
+import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import com.fasterxml.jackson.databind.JavaType;
 
 import study.fw.core.binding.message.Header;
 import study.fw.core.binding.message.STUDYData;
+import study.fw.core.binding.message.STUDYDataFactory;
 import study.fw.core.binding.message.StudyDataMessageType;
 
 public class StudyJsonMessageConverter extends MappingJackson2HttpMessageConverter {
 	
+	
+    @Autowired
+    MessageSource messageSource;
+    
    @Override
     public Object read(Type type, Class<?> contextClass, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
 
@@ -72,5 +82,55 @@ public class StudyJsonMessageConverter extends MappingJackson2HttpMessageConvert
         
         return retObj;
    }
+	  
+/*   @Override
+   protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
 	   
+	   if (!(object instanceof STUDYData)) {
+		   //TODO: Thead Local 데이터 모두 제거
+		   return;
+	   }
+	   
+	   //클라이언트로 다시 던질 파라미터 object를 studyData 객체로 형변환
+	   STUDYData studyData = (STUDYData) object;
+	   STUDYData resData = null;
+	   
+	   try {
+		   //헤더 정보 처리
+		   switch (studyData.getMessageType()) {
+		   //writeInternal은 서버에서 클라이언트로 내려주는 경우인데,, FROM_CLIENT로 메시지 타입이 들어올수없음. 에러로 바꿔서 내보냄.
+		   case FROM_CLIENT:
+			   resData = STUDYDataFactory.createFromException();
+			   setHeaderWithRequestObject(resData);
+			   studyData = resData;
+			   break;
+		   case TO_CLIENT:
+			   
+			   
+		   }
+	   }
+   }*/
+   
+/*   private void setHeaderWithRequestObject(STUDYData studyData) {
+       //Header header = (Header) ContextHolder.getContextObject(Constants.STUDYDATA_HEADER);
+
+	   Header header = null;
+	   
+       if (header == null) {
+           header = new Header();
+       }
+
+       String resultCode = "F";
+       String resultMessage = "common.error.cannot_response_with_req_object";
+
+       header.setResultCode(resultCode);
+       
+	   String msg = messageSource.getMessage(resultMessage, null, Locale.getDefault());
+       header.setMessage(msg);
+       if (!StringUtils.isEmpty(msg) && !msg.equals(resultMessage)) {
+           header.setMessageId(resultMessage);
+       }
+
+       studyData.setHeader(header);
+   }*/
 }

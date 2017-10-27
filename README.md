@@ -6,6 +6,16 @@ spring framework를 공부하며 예외, 전문 처리 등 기본 기능 구현�
 [mvc 모델을 위한 스프링 설정](https://github.com/chajs226/study-online/blob/master/README.md)
 
 ### 2. 메시지 컨버터(전문 처리)
+#### *annotation-driven*
+스프링에서 mvc:annotation-driven은 @requestBody, @responseBody 어노테이션을 만났을 때의 처리를 관장한다. 특정한 message-converter를 구현하지 않는다면 기본적으로 JSON에서 key, value를 꺼내서 VO 객체에 넣는 작업을 해준다. 자체 전문형식을 사용하기 위해 메시지 컨버터 관련 작업을 위한 클래스(studyJsonMessageConverter)를 구현해서 설정하였다.
+studyJsonMessageConverter 메시지 컨버터는 MappingJackson2HttpMessageConverter를 상속받는데,  MappingJackson2HttpMessageConverter 는 http 바디부에 있는 Json형태의 메시지를 @RequestBody 다음에 정의된 오브젝트 형식으로 변환하는 작업을 한다. read 부분만 구현함.
+```xml	
+<mvc:annotation-driven validator="validator">	
+	<mvc:message-converters>
+		<ref bean="studyJsonMessageConverter" />
+	</mvc:message-converters>
+</mvc:annotation-driven>
+```
 
 ### 3. Exception 처리
 #### *study.fw.online.aspect.StudyControllerExceptionAdvice*
