@@ -36,7 +36,9 @@ public class StudyControllerExceptionAdvice {
 
 ### 4. ContextHolder 구현
 #### *study.fw.online.aspect.StudyControllerClassNameAdvice*
-~~~Controller 앞 단에 Pointcut을 걸어서 ContextHolder에 필요한 값을 셋팅함.~~~
+Controller 앞 단에 Pointcut을 걸어서 요청된 controller 이름을 ContextHolder에 셋팅함.
+#### *study.fw.online.context.ContextSettingInterceptor*
+인터셉터를 통해서 Controller 가 호출되기 전, 앞 단에서 HTTP 로 요청된 Header의 일부 정보를 ContextHolder에 담음.
 
 ### 5. BeanNameGenerator
 spring 에서 annotation-drviven component scan을 하게되면, 기본적으로 Bean의 id 클래스명이 된다. 다른 패키지에 동일한 클래스명이 있으면 에러가 발생하는데, 이를 회피하기 위해서 BeanNameGenerator를 만들어서 name-generator로 지정한다.
