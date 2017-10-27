@@ -4,6 +4,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import study.fw.core.context.ContextHolder;
 
 @Aspect
 public class StudyControllerClassNameAdvice {
@@ -13,6 +14,6 @@ public class StudyControllerClassNameAdvice {
 
     @Before("controllerMethod()")
     public void putClassNameInfoIntoContextHolder(JoinPoint jp) {
-        //ContextHolder.setContext(Constants.CONTROLLER_NAME, jp.getSignature().getDeclaringTypeName());
+        ContextHolder.setContext("CLASS_NAME", jp.getSignature().getDeclaringTypeName());
     }
 }
